@@ -1,13 +1,13 @@
 package controllers
 
 import (
-	"cmdb/base/errors"
-	"cmdb/forms"
-	"cmdb/models"
-
 	"net/http"
 
 	"github.com/astaxie/beego"
+
+	"cmdb/base/errors"
+	"cmdb/forms"
+	"cmdb/models"
 )
 
 // AuthController 认证控制器
@@ -17,6 +17,14 @@ type AuthController struct {
 
 // Login 认证登录
 func (c *AuthController) Login() {
+	sessionKey := beego.AppConfig.DefaultString("auth::SessionKey", "user")
+	sessionUser := c.GetSession(sessionKey)
+	if sessionUser != nil {
+		action := beego.AppConfig.DefaultString("auth::HomeAction", "UserController.Query")
+		c.Redirect(beego.URLFor(action), http.StatusFound)
+		return
+	}
+
 	form := &forms.LoginForm{}
 	errs := errors.New()
 	// Get请求直接加载页面
@@ -30,7 +38,12 @@ func (c *AuthController) Login() {
 				errs.Add("default", "用户名或密码错误")
 				// 用户不存在
 			} else if user.ValidPassword(form.Password) {
-				c.Redirect("/home/index", http.StatusFound)
+				// 用户密码正确
+				// 记录用户状态(session 记录服务器端)
+				c.SetSession("user", user.ID)
+
+				// c.Redirect("/home/index", http.StatusFound)
+				c.Redirect(beego.URLFor("UserController.Query"), http.StatusFound)
 			} else {
 				// 用户密码不正确
 				errs.Add("default", "用户名或密码错误")
@@ -44,5 +57,11 @@ func (c *AuthController) Login() {
 	c.Data["errors"] = errs
 	// 定义加载页面
 	c.TplName = "auth/login.html"
+}
 
+// Logout 用户退出登录
+func (c *AuthController) Logout() {
+	c.DestroySession()
+	action := beego.AppConfig.DefaultString("auth::LogoutAction", "AuthController.Login")
+	c.Redirect(beego.URLFor(action), http.StatusFound)
 }
