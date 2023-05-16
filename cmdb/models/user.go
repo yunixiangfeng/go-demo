@@ -3,9 +3,10 @@ package models
 import (
 	"time"
 
-	"cmdb/utils"
-
 	"github.com/astaxie/beego/orm"
+
+	"cmdb/forms"
+	"cmdb/utils"
 )
 
 // User 用户对象
@@ -21,9 +22,9 @@ type User struct {
 	Email      string     `orm:"size(64)"`
 	Department string     `orm:"size(128)"`
 	Status     int        `orm:""`
-	Createdat  *time.Time `orm:"column(created_at);auto_now_add"`
-	Updatedat  *time.Time `orm:"column(updated_at);auto_now"`
-	Deletedat  *time.Time `orm:"column(deleted_at);null"`
+	CreatedAt  *time.Time `orm:"auto_now_add"`
+	UpdatedAt  *time.Time `orm:"auto_now"`
+	DeletedAt  *time.Time `orm:"null"`
 }
 
 // ValidPassword 验证用户密码是否正确
@@ -52,6 +53,16 @@ func (u *User) StatusText() string {
 	return "未知"
 }
 
+// GetUserByPk 通过用户ID获取用户信息
+func GetUserByPk(pk int) *User {
+	user := &User{ID: pk}
+	ormer := orm.NewOrm()
+	if err := ormer.Read(user); err == nil {
+		return user
+	}
+	return nil
+}
+
 // GetUserByName 通过用户名获取用户
 func GetUserByName(name string) *User {
 	user := &User{Name: name}
@@ -78,4 +89,23 @@ func QueryUser(q string) []*User {
 	}
 	queryset.All(&users)
 	return users
+}
+
+// ModifyUser 修改用户信息
+func ModifyUser(form *forms.UserModifyForm) {
+	if user := GetUserByPk(form.ID); user != nil {
+		user.Name = form.Name
+		ormer := orm.NewOrm()
+		ormer.Update(user, "Name")
+	}
+}
+
+// DeleteUser 删除用户
+func DeleteUser(pk int) {
+	ormer := orm.NewOrm()
+	ormer.Delete(&User{ID: pk})
+}
+
+func init() {
+	orm.RegisterModel(new(User))
 }

@@ -3,6 +3,8 @@ package controllers
 import (
 	"net/http"
 
+	"cmdb/base/controllers/base"
+
 	"github.com/astaxie/beego"
 
 	"cmdb/base/errors"
@@ -12,7 +14,7 @@ import (
 
 // AuthController 认证控制器
 type AuthController struct {
-	beego.Controller
+	base.BaseController
 }
 
 // Login 认证登录
@@ -20,7 +22,7 @@ func (c *AuthController) Login() {
 	sessionKey := beego.AppConfig.DefaultString("auth::SessionKey", "user")
 	sessionUser := c.GetSession(sessionKey)
 	if sessionUser != nil {
-		action := beego.AppConfig.DefaultString("auth::HomeAction", "UserController.Query")
+		action := beego.AppConfig.DefaultString("auth::HomeAction", "HomeController.Index")
 		c.Redirect(beego.URLFor(action), http.StatusFound)
 		return
 	}
@@ -40,10 +42,11 @@ func (c *AuthController) Login() {
 			} else if user.ValidPassword(form.Password) {
 				// 用户密码正确
 				// 记录用户状态(session 记录服务器端)
-				c.SetSession("user", user.ID)
+				sessionKey := beego.AppConfig.DefaultString("auth::SessionKey", "user")
+				action := beego.AppConfig.DefaultString("auth::HomeAction", "HomeController.Index")
 
-				// c.Redirect("/home/index", http.StatusFound)
-				c.Redirect(beego.URLFor("UserController.Query"), http.StatusFound)
+				c.SetSession(sessionKey, user.ID)
+				c.Redirect(beego.URLFor(action), http.StatusFound)
 			} else {
 				// 用户密码不正确
 				errs.Add("default", "用户名或密码错误")

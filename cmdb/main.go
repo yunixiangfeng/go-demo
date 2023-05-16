@@ -9,7 +9,6 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"cmdb/models"
 	_ "cmdb/routers"
 )
 
@@ -24,7 +23,7 @@ func main() {
 
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", dsn)
-	orm.RegisterModel(new(models.User))
+
 	// 测试数据库连接
 	if db, err := orm.GetDB("default"); err != nil {
 		log.Fatal(err)
