@@ -1,33 +1,29 @@
 package models
 
 import (
-	"fmt"
 	"time"
 
 	"cmdb/utils"
-)
 
-const (
-	sqlQueryByName = "select id, name, password from user where name=?"
-	sqlQuery       = "select id, staff_id, name, nickname, gender, tel, email, addr, department, status from user"
+	"github.com/astaxie/beego/orm"
 )
 
 // User 用户对象
 type User struct {
-	ID         int
-	StaffID    string
-	Name       string
-	Nickname   string
-	Password   string
-	Gender     int
-	Tel        string
-	Addr       string
-	Email      string
-	Department string
-	Status     int
-	CreatedAt  *time.Time
-	UpdatedAt  *time.Time
-	DeletedAt  *time.Time
+	ID         int        `orm:"column(id)"`
+	StaffID    string     `orm:"column(staff_id);size(32)"`
+	Name       string     `orm:"size(64)"`
+	Nickname   string     `orm:"size(64)"`
+	Password   string     `orm:"size(1024)"`
+	Gender     int        `orm:""`
+	Tel        string     `orm:"size(32)"`
+	Addr       string     `orm:"size(128)"`
+	Email      string     `orm:"size(64)"`
+	Department string     `orm:"size(128)"`
+	Status     int        `orm:""`
+	Createdat  *time.Time `orm:"column(created_at);auto_now_add"`
+	Updatedat  *time.Time `orm:"column(updated_at);auto_now"`
+	Deletedat  *time.Time `orm:"column(deleted_at);null"`
 }
 
 // ValidPassword 验证用户密码是否正确
@@ -58,8 +54,9 @@ func (u *User) StatusText() string {
 
 // GetUserByName 通过用户名获取用户
 func GetUserByName(name string) *User {
-	user := &User{}
-	if err := db.QueryRow(sqlQueryByName, name).Scan(&user.ID, &user.Name, &user.Password); err == nil {
+	user := &User{Name: name}
+	ormer := orm.NewOrm()
+	if err := ormer.Read(user, "Name"); err == nil {
 		return user
 	}
 	return nil
@@ -67,27 +64,18 @@ func GetUserByName(name string) *User {
 
 // QueryUser 查询用户
 func QueryUser(q string) []*User {
-	users := make([]*User, 0, 10)
-	sql := sqlQuery
-
-	params := []interface{}{}
-	q = utils.Like(q)
+	var users []*User
+	queryset := orm.NewOrm().QueryTable(&User{})
 	if q != "" {
-		sql += " WHERE staff_id like ? ESCAPE '/' OR name like ? ESCAPE '/' OR nickname like ? ESCAPE '/' OR tel like ? ESCAPE '/' OR email like ? ESCAPE '/' OR addr like ? ESCAPE '/' OR department like ? ESCAPE '/'"
-		params = append(params, q, q, q, q, q, q, q)
+		cond := orm.NewCondition()
+		cond = cond.Or("name__icontains", q)
+		cond = cond.Or("nickname__icontains", q)
+		cond = cond.Or("tel__icontains", q)
+		cond = cond.Or("addr__icontains", q)
+		cond = cond.Or("email__icontains", q)
+		cond = cond.Or("department__icontains", q)
+		queryset = queryset.SetCond(cond)
 	}
-
-	rows, err := db.Query(sql, params...)
-	if err != nil {
-		return users
-	}
-
-	for rows.Next() {
-		user := &User{}
-		if err := rows.Scan(&user.ID, &user.StaffID, &user.Name, &user.Nickname, &user.Gender, &user.Tel, &user.Email, &user.Addr, &user.Department, &user.Status); err == nil {
-			users = append(users, user)
-			fmt.Printf("%#v\n", user)
-		}
-	}
+	queryset.All(&users)
 	return users
 }
