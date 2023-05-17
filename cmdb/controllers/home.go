@@ -6,7 +6,7 @@ import (
 
 // HomeController 首页控制器
 type HomeController struct {
-	auth.AuthorizationController
+	auth.LayoutController
 }
 
 // Index 首页显示方法

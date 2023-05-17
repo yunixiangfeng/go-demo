@@ -20,3 +20,7 @@ updated_at
 deleted_at
 
 部门管理
+
+
+Data[nav]=home
+Data[nav]=user

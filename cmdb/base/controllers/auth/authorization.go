@@ -8,6 +8,7 @@ import (
 
 	"cmdb/base/controllers/base"
 	"cmdb/models"
+	"cmdb/services"
 )
 
 // AuthorizationController 所有需要认证才能访问的基础控制器
@@ -30,7 +31,7 @@ func (c *AuthorizationController) Prepare() {
 
 	if sessonValue != nil {
 		if pk, ok := sessonValue.(int); ok {
-			if user := models.GetUserByPk(pk); user != nil {
+			if user := services.UserService.GetByPk(pk); user != nil {
 				c.Data["loginUser"] = user
 				c.LoginUser = user
 				return

@@ -5,16 +5,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ if eq  .nav `home` }}active{{ end }}">
+            <li class="nav-item {{ if eq .nav `home` }}active{{ end }}">
                 <a class="nav-link" href="{{ urlfor `HomeController.Index`}}">首页</span></a>
             </li>
-            <li class="nav-item {{ if eq  .nav `user` }}active{{ end }}">
+            <li class="nav-item {{ if eq .nav `user` }}active{{ end }}">
                 <a class="nav-link" href="{{ urlfor `UserController.Query`}}">用户管理</a>
             </li>
         </ul>
     </div>
     <span class="navbar-text">
-        欢迎 {{ .loginUser.Nickname }}
+        欢迎 <a href="{{ urlfor `PasswordController.Modify` }}">{{ .loginUser.Nickname }}</a>
     </span>
     <form class="form-inline">
         <a class="btn btn-link" href="{{ urlfor `AuthController.Logout` }}">退出登录</a>
