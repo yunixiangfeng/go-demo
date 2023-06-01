@@ -2,11 +2,11 @@ package controllers
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 	"todolist/models"
 	"todolist/session"
+	"todolist/utils"
 )
 
 func TaskAction(w http.ResponseWriter, r *http.Request) {
@@ -14,8 +14,7 @@ func TaskAction(w http.ResponseWriter, r *http.Request) {
 	if _, ok := sessionObj.Get("user"); !ok {
 		http.Redirect(w, r, "/user/login/", http.StatusFound)
 	} else {
-		tpl := template.Must(template.New("task.html").ParseFiles("views/task.html"))
-		tpl.Execute(w, models.GetTasks())
+		utils.Render(w, "base.html", []string{"views/layouts/base.html", "views/task/task.html"}, models.GetTasks())
 	}
 }
 
@@ -27,8 +26,9 @@ func TaskCreateAction(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == http.MethodGet {
-		tpl := template.Must(template.New("create_task.html").ParseFiles("views/create_task.html"))
-		tpl.Execute(w, nil)
+		// tpl := template.Must(template.New("create_task.html").ParseFiles("views/task/create.html"))
+		// tpl.Execute(w, nil)
+		utils.Render(w, "base.html", []string{"views/layouts/base.html", "views/task/create.html"}, nil)
 	} else if r.Method == http.MethodPost {
 
 		name := r.PostFormValue("name")
@@ -57,8 +57,7 @@ func TaskModifyAction(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				w.WriteHeader(http.StatusBadRequest)
 			} else {
-				tpl := template.Must(template.New("modify_task.html").ParseFiles("views/modify_task.html"))
-				tpl.Execute(w, task)
+				utils.Render(w, "base.html", []string{"views/layouts/base.html", "views/task/modify.html"}, task)
 			}
 		} else {
 			w.WriteHeader(http.StatusBadRequest)

@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"html/template"
 	"net/http"
 	"strings"
 	"todolist/models"
 	"todolist/session"
+	"todolist/utils"
 )
 
 func UserAction(w http.ResponseWriter, r *http.Request) {
@@ -17,29 +17,32 @@ func UserAction(w http.ResponseWriter, r *http.Request) {
 
 	q := strings.TrimSpace(r.FormValue("q"))
 
-	tpl := template.Must(template.New("user.html").ParseFiles("views/user/user.html"))
-
-	tpl.Execute(w, struct {
+	context := struct {
 		Query string
 		Users []models.User
-	}{q, models.GetUsers(q)})
+	}{q, models.GetUsers(q)}
+
+	utils.Render(w, "base.html", []string{"views/layouts/base.html", "views/user/user.html"}, context)
 }
 
 func LoginAction(w http.ResponseWriter, r *http.Request) {
+	context := struct {
+		Name  string
+		Error string
+	}{"", ""}
+
 	if r.Method == http.MethodGet {
-		tpl := template.Must(template.New("login.html").ParseFiles("views/user/login.html"))
-		tpl.Execute(w, nil)
+		utils.Render(w, "login.html", []string{"views/user/login.html"}, context)
+
 	} else if r.Method == http.MethodPost {
 		name := r.PostFormValue("name")
 		password := r.PostFormValue("password")
 
 		user, err := models.GetUserByName(name)
 		if err != nil || !user.ValidatePassword(password) {
-			tpl := template.Must(template.New("login.html").ParseFiles("views/user/login.html"))
-			tpl.Execute(w, struct {
-				Name  string
-				Error string
-			}{name, "用户名或密码错误"})
+			context.Name = name
+			context.Error = "用户名或密码错误"
+			utils.Render(w, "login.html", []string{"views/user/login.html"}, context)
 		} else {
 			sessionObj := session.DefaultManager.SessionStart(w, r)
 			//登陆成功
@@ -87,9 +90,7 @@ func UserCreateAction(w http.ResponseWriter, r *http.Request) {
 			Desc     string
 		}{errors, name, password, birthday, tel, addr, desc}
 	}
-
-	tpl := template.Must(template.New("create.html").ParseFiles("views/user/create.html"))
-	tpl.Execute(w, context)
+	utils.Render(w, "base.html", []string{"views/layouts/base.html", "views/user/create.html"}, context)
 }
 
 func init() {
