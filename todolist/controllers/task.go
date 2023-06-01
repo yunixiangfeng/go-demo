@@ -17,12 +17,12 @@ type TaskController struct {
 	LoginRequiredController
 }
 
-func (c *TaskController) Prepare() {
-	c.LoginRequiredController.Prepare()
+// func (c *TaskController) Prepare() {
+// 	c.LoginRequiredController.Prepare()
 
-	c.Layout = "layout/base.html" // 设置layout
-	c.Data["nav"] = "task"        // 设置菜单
-}
+// 	c.Layout = "layout/base.html" // 设置layout
+// 	c.Data["nav"] = "task"        // 设置菜单
+// }
 
 // 任务列表
 func (c *TaskController) Index() {
@@ -46,23 +46,46 @@ func (c *TaskController) Index() {
 
 	orm.NewOrm().QueryTable(&models.Task{}).SetCond(condition).All(&tasks)
 
+	c.Layout = "layout/base.html" // 设置layout
+	c.Data["nav"] = "task"        // 设置菜单
+	c.LayoutSections = map[string]string{}
+	c.LayoutSections["LayoutScripts"] = "task/index_scripts.html"
+
 	c.TplName = "task/index.html"
+	c.Data["xsrf_token"] = c.XSRFToken() // csrftoken
 	c.Data["tasks"] = tasks
 	c.Data["q"] = q
+	c.Data["statusTexts"] = models.TaskStatusTexts
 }
 
 // 任务创建
 func (c *TaskController) Create() {
-	form := &forms.TaskCreateForm{}   // 任务创建表单
-	valid := &validation.Validation{} // 验证器
+	json := map[string]interface{}{
+		"code":   405,
+		"text":   "请求方式错误",
+		"result": nil,
+	}
 
 	if c.Ctx.Input.IsPost() {
+		json = map[string]interface{}{
+			"code":   400,
+			"text":   "提交数据错误",
+			"result": nil,
+		}
+
+		form := &forms.TaskCreateForm{}   // 任务创建表单
+		valid := &validation.Validation{} // 验证器
 
 		// 解析请求参数到form中(根据form标签)
-		if c.ParseForm(form) == nil {
+		if err := c.ParseForm(form); err != nil {
+			json["text"] = err.Error()
+		} else {
 			// 表单验证
-			if corret, err := valid.Valid(form); err == nil && corret {
-
+			if corret, err := valid.Valid(form); err != nil {
+				json["text"] = err.Error()
+			} else if !corret {
+				json["result"] = valid.Errors
+			} else {
 				// 创建任务
 				task := &models.Task{
 					Name:       form.Name,
@@ -72,22 +95,45 @@ func (c *TaskController) Create() {
 				}
 
 				ormer := orm.NewOrm()
-				ormer.Insert(task)
+				if _, err := ormer.Insert(task); err == nil {
+					json = map[string]interface{}{
+						"code":   200,
+						"text":   "创建成功",
+						"result": task,
+					}
+				} else {
+					json = map[string]interface{}{
+						"code":   500,
+						"text":   "服务端错误",
+						"result": nil,
+					}
+				}
+			}
+		}
+	}
+	c.Data["json"] = json
+	c.ServeJSON()
+}
 
-				// 使用flash提示操作结果
-				flash := beego.NewFlash()
-				flash.Success("创建任务成功")
-				flash.Store(&c.Controller)
-				c.Redirect(beego.URLFor("TaskController.Index"), http.StatusFound)
+func (c *TaskController) Detail() {
+	json := map[string]interface{}{
+		"code":   400,
+		"text":   "请求数据错误",
+		"result": nil,
+	}
+	if id, err := c.GetInt("id"); err == nil {
+		task := models.Task{Id: id}
+		if orm.NewOrm().Read(&task) == nil && (c.User.IsSuper || task.CreateUser == c.User.Id) {
+			json = map[string]interface{}{
+				"code":   200,
+				"text":   "获取数据成功",
+				"result": task,
 			}
 		}
 	}
 
-	c.TplName = "task/create.html"
-	c.Data["xsrf_token"] = c.XSRFToken() // csrftoken
-	c.Data["form"] = form
-	c.Data["validation"] = valid
-
+	c.Data["json"] = json
+	c.ServeJSON()
 }
 
 // 任务修改
