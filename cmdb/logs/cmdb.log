@@ -216,3 +216,59 @@
 2023/06/01 21:35:57.742 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.8929ms|   match|[44m GET     [0m /target/create   r:/target/create/*
 2023/06/01 21:36:53.322 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.4967ms|   match|[44m GET     [0m /job/query   r:/job/query/*
 2023/06/01 21:36:54.592 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.252ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/01 22:01:29.611 [I] [asm_amd64.s:1571]  http server Running on http://:8080
+2023/06/01 22:01:29.614 [I] [asm_amd64.s:1571]  https server Running on https://:443
+2023/06/01 22:01:36.007 [D] [server.go:2916]  |            ::1|[42m 200 [0m|   380.4793ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/01 22:01:37.105 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.3514ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/01 22:01:39.913 [C] [panic.go:838]  the request url is  /alert/query
+2023/06/01 22:01:39.914 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:277
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
+2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
+2023/06/01 22:01:39.916 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2023/06/01 22:01:45.996 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.2394ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/01 22:01:47.337 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.0487ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/01 22:01:48.907 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.915ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/01 22:01:50.052 [C] [panic.go:838]  the request url is  /alert/query
+2023/06/01 22:01:50.060 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:277
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
+2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
+2023/06/01 22:01:50.062 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2023/06/01 22:01:55.370 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.1934ms|   match|[44m GET     [0m /home/index   r:/home/index/*
+2023/06/01 22:01:56.181 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.8899ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/01 22:01:56.851 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.7074ms|   match|[44m GET     [0m /home/index   r:/home/index/*
+2023/06/01 22:01:57.386 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.3132ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/01 22:01:58.657 [C] [panic.go:838]  the request url is  /alert/query
+2023/06/01 22:01:58.657 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
+2023/06/01 22:01:58.657 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
+2023/06/01 22:01:58.657 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
+2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
+2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
+2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:277
+2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
+2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
+2023/06/01 22:01:58.660 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
+2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
+2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
+2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
+2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
+2023/06/01 22:01:58.662 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
