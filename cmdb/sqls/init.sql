@@ -18,4 +18,4 @@ create table if not exists user(
     deleted_at datetime
 )engine=innodb default charset utf8mb4;
 
-insert into user(staff_id, name, nickname, password, gender, tel, email, addr, department, status, created_at, updated_at) values("K00001", "wu", "wu", md5("123456"), 1, "13622222222", "iamwu@outlook.com", "北京市", "研发一部", 0, now(), now());
+insert into user(staff_id, name, nickname, password, gender, tel, email, addr, department, status, created_at, updated_at) values("K00001", "wu123", "wu123", md5("123456"), 1, "13622222222", "iamwu@outlook.com", "北京市", "研发一部", 0, now(), now());

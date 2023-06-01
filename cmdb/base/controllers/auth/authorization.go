@@ -2,7 +2,6 @@ package auth
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/astaxie/beego"
 
@@ -17,17 +16,17 @@ type AuthorizationController struct {
 	LoginUser *models.User
 }
 
-func (c *AuthorizationController) getNav() string {
-	controllerName, _ := c.GetControllerAndAction()
-	return strings.ToLower(strings.TrimSuffix(controllerName, "Controller"))
-}
+// func (c *AuthorizationController) getNav() string {
+// 	controllerName, _ := c.GetControllerAndAction()
+// 	return strings.ToLower(strings.TrimSuffix(controllerName, "Controller"))
+// }
 
 // Prepare 用户认证检查
 func (c *AuthorizationController) Prepare() {
 	sessionKey := beego.AppConfig.DefaultString("auth::SessionKey", "user")
 	sessonValue := c.GetSession(sessionKey)
 	c.Data["loginUser"] = nil
-	c.Data["nav"] = c.getNav()
+	// c.Data["nav"] = c.getNav()
 
 	if sessonValue != nil {
 		if pk, ok := sessonValue.(int); ok {
