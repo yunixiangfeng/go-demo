@@ -3,70 +3,53 @@ package models
 import (
 	"time"
 
-	"github.com/jinzhu/gorm"
+	"github.com/astaxie/beego/orm"
 )
 
+// 通过iota定义枚举值（任务状态）
 const (
-	STATUS_TASK_NEW      = 0
-	STATUS_TASK_DOING    = 1
-	STATUS_TASK_STOP     = 2
-	STATUS_TASK_COMPLETE = 2
+	TastStatusNew = iota
+	TastStatusDoing
+	TastStatusStop
+	TastStatusComplete
 )
 
+// 定义任务状态映射
+var TaskStatusTexts = map[int]string{
+	TastStatusNew:      "新建",
+	TastStatusDoing:    "正在进行中",
+	TastStatusStop:     "停止",
+	TastStatusComplete: "完成",
+}
+
+// 定义任务模型
 type Task struct {
-	gorm.Model
-
-	Name         string     `json:"name" gorm:"type:varchar(256); not null; default:''"`
-	Progress     int        `json:"progress" gorm:"not null; default:0"`
-	User         string     `json:"user" gorm:"type:varchar(32); not null; default:''"`
-	Desc         string     `json:"desc" gorm:"column:description; type:varchar(512); not null; default:''"`
-	Status       int        `json:"staus" gorm:"not null; default:0"`
-	CreateTime   *time.Time `json:"create_time" gorm:"column:create_time; type:datetime"`
-	CompleteTime *time.Time `json:"complete_time" gorm:"column:complete_time; type:datetime"`
+	Id           int
+	Name         string     `orm:"type(varchar);size(256);default();"` // 任务名
+	Progress     int        `orm:"default(0);"`                        //进度
+	Worker       string     `orm:"type(varchar);size(32);default();"`  //执行者（负责人）
+	CreateUser   int        `orm:"default(0);"`                        // 创建人
+	Desc         string     `orm:"type(varchar);size(512);default();"` //描述
+	Status       int        `orm:"default(0);"`                        //状态
+	CreateTime   *time.Time `orm:"type(datetime);auto_now_add;"`       // 创建时间，在创建时自动设置（auto_now_add）
+	CompleteTime *time.Time `orm:"type(datetime);null;"`               //完成时间，允许为null
 }
 
-func GetTasks() []Task {
-	var tasks []Task
-	db.Find(&tasks)
-	return tasks
+// 获取任务状态中文
+func (t *Task) StatusText() string {
+	return TaskStatusTexts[t.Status]
 }
 
-func CreateTask(name, user, desc string) {
-	now := time.Now()
-	task := Task{
-		Name:       name,
-		User:       user,
-		Desc:       desc,
-		CreateTime: &now,
+// 获取创建者用户名
+func (t *Task) CreateUserName() string {
+	ormer := orm.NewOrm()
+	user := User{Id: t.CreateUser}
+	if ormer.Read(&user) == nil {
+		return user.Name
 	}
-	db.Create(&task)
+	return "未知"
 }
 
-func GetTaskById(id int) (Task, error) {
-	var task Task
-	err := db.First(&task, "id=?", id).Error
-	return task, err
-}
-
-func ModifyTask(id int, name, desc string, progress int, user string, status int) {
-	var task Task
-	if db.First(&task, "id=?", id).Error == nil {
-		task.Name = name
-		task.Desc = desc
-		task.Progress = progress
-		task.User = user
-		task.Status = status
-		if status == STATUS_TASK_COMPLETE {
-			now := time.Now()
-			task.CompleteTime = &now
-		}
-		db.Save(&task)
-	}
-}
-
-func DeleteTask(id int) {
-	var task Task
-	if db.First(&task, "id=?", id).Error == nil {
-		db.Delete(&task)
-	}
+func init() {
+	orm.RegisterModel(&Task{}) //注册任务模型
 }

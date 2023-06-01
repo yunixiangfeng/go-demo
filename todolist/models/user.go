@@ -1,128 +1,37 @@
 package models
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
-	"strings"
 	"time"
 
-	"todolist/utils"
+	"github.com/yunixiangfeng/go-demo/todolist/utils"
 
-	"github.com/jinzhu/gorm"
+	"github.com/astaxie/beego/orm"
 )
 
+// 用户模型
 type User struct {
-	gorm.Model
-
-	Name       string    `gorm:"type:varchar(32); not null; default:'' "`
-	Password   string    `gorm:"type:varchar(1024); not null; default:'' "`
-	Birthday   time.Time `gorm:"type:date; not null"`
-	Sex        bool      `gorm:"not null; default:false"`
-	Tel        string    `gorm:"type:varchar(16); not null; default:''"`
-	Addr       string    `gorm:"type:varchar(512); not null; default:''"`
-	Desc       string    `gorm:"column:description; type:text; not null; default:''"`
-	CreateTime time.Time `gorm:"column:create_time; type:datetime"`
+	Id         int
+	Name       string     `orm:"type(varchar);size(32);default();"`   //用户名
+	Password   string     `orm:"type(varchar);size(1024);default();"` // 密码
+	Birthday   *time.Time `orm:"type(date);null;"`                    //出生日期，允许为null
+	Sex        bool       `orm:"default(false)"`                      //性别，true：男，false： 女
+	Tel        string     `orm:"type(varchar);size(16);default()"`    //电话号码
+	Addr       string     `orm:"type(varchar);size(512);default()"`   // 住址
+	Desc       string     `orm:"type(text);default()"`                //描述
+	IsSuper    bool       `orm:"default(false)"`                      //是否为超级管理员, true:是，false：非
+	CreateTime *time.Time `orm:"type(datetime);auto_now_add;"`        // 创建时间，在创建时自动设置（auto_now_add）
 }
 
-func (u User) ValidatePassword(password string) bool {
+// 验证密码函数
+func (u *User) ValidatePassword(password string) bool {
 	return utils.Md5(password) == u.Password
 }
 
-func loadUsers() (map[int]User, error) {
-	if bytes, err := ioutil.ReadFile("datas/users.json"); err != nil {
-		if os.IsNotExist(err) {
-			return map[int]User{}, nil
-		}
-		return nil, err
-	} else {
-		var users map[int]User
-		if err := json.Unmarshal(bytes, &users); err == nil {
-			return users, nil
-		} else {
-			return nil, err
-		}
-	}
+// 更新密码函数
+func (u *User) SetPassword(password string) {
+	u.Password = utils.Md5(password)
 }
 
-func storeUsers(users map[int]User) error {
-	bytes, err := json.Marshal(users)
-	if err != nil {
-		return err
-	}
-	return ioutil.WriteFile("datas/users.json", bytes, 0x066)
-}
-
-func GetUsers(q string) []User {
-	users, err := loadUsers()
-	if err != nil {
-		panic(err)
-	}
-
-	rtList := make([]User, 0)
-	for _, user := range users {
-		if q == "" || strings.Contains(user.Name, q) ||
-			strings.Contains(user.Tel, q) || strings.Contains(user.Addr, q) ||
-			strings.Contains(user.Desc, q) {
-			rtList = append(rtList, user)
-		}
-	}
-	return rtList
-}
-
-func GetUserByName(name string) (User, error) {
-	var user User
-	err := db.First(&user, "name=?", name).Error
-	return user, err
-}
-
-func ValidateCreateUser(name, password, birthday, tel, addr, desc string) map[string]string {
-	errors := map[string]string{}
-	if len(name) > 12 || len(name) < 4 {
-		errors["name"] = "名称长度必须在4~12之间"
-	} else if _, err := GetUserByName(name); err == nil {
-		errors["name"] = "名称重复"
-	}
-	if len(password) > 30 || len(password) < 6 {
-		errors["password"] = "密码长度必须在6~30之间"
-	}
-	return errors
-}
-
-func GetUserId() (int, error) {
-	users, err := loadUsers()
-	if err != nil {
-		return -1, err
-	}
-	var id int
-	for uid := range users {
-		if id < uid {
-			id = uid
-		}
-	}
-	return id + 1, nil
-}
-
-func CreateUser(name, password, birthday, tel, addr, desc string) {
-	id, err := GetUserId()
-	if err != nil {
-		panic(err)
-	}
-
-	day, _ := time.Parse("2006-01-02", birthday)
-
-	user := User{
-		Name:     name,
-		Password: utils.Md5(password),
-		Birthday: day,
-		Tel:      tel,
-		Addr:     addr,
-		Desc:     desc,
-	}
-	users, err := loadUsers()
-	if err != nil {
-		panic(err)
-	}
-	users[id] = user
-	storeUsers(users)
+func init() {
+	orm.RegisterModel(&User{}) // 注册模型
 }
