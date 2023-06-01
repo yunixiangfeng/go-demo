@@ -1,8 +1,8 @@
 package models
 
 import (
+	"database/sql"
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -12,13 +12,15 @@ import (
 )
 
 type User struct {
-	Id       int
-	Name     string
-	Password string
-	Birthday time.Time
-	Tel      string
-	Addr     string
-	Desc     string
+	Id         int
+	Name       string
+	Password   string
+	Birthday   time.Time
+	Sex        bool
+	Tel        string
+	Addr       string
+	Desc       string
+	CreateTime time.Time
 }
 
 func (u User) ValidatePassword(password string) bool {
@@ -67,17 +69,20 @@ func GetUsers(q string) []User {
 }
 
 func GetUserByName(name string) (User, error) {
-	users, err := loadUsers()
+	var user User
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		return User{}, err
+		return user, err
 	}
 
-	for _, user := range users {
-		if user.Name == name {
-			return user, nil
-		}
+	if err := db.Ping(); err != nil {
+		return user, err
 	}
-	return User{}, errors.New("Not Found")
+	defer db.Close()
+
+	row := db.QueryRow("select id,name,password,birthday,sex,tel,addr,create_time from todolist_user where name=?", name)
+	err = row.Scan(&user.Id, &user.Name, &user.Password, &user.Birthday, &user.Sex, &user.Tel, &user.Addr, &user.CreateTime)
+	return user, err
 }
 
 func ValidateCreateUser(name, password, birthday, tel, addr, desc string) map[string]string {

@@ -1,137 +1,121 @@
 package models
 
 import (
-	"encoding/json"
-	"errors"
+	"database/sql"
 	"fmt"
-	"io/ioutil"
-	"os"
+	"time"
 )
 
 type Task struct {
-	Id       int    `json:"id"`
-	Name     string `json:"name"`
-	Progress int    `json:"progress"`
-	User     string `json:"user"`
-	Desc     string `json:"desc"`
-	Status   string `json:"staus"`
-}
-
-func loadTasks() ([]Task, error) {
-	if bytes, err := ioutil.ReadFile("datas/tasks.json"); err != nil {
-		if os.IsNotExist(err) {
-			return []Task{}, nil
-		}
-		return nil, err
-	} else {
-		var tasks []Task
-		if err := json.Unmarshal(bytes, &tasks); err == nil {
-			return tasks, nil
-		} else {
-			return nil, err
-		}
-	}
-}
-
-func storeTasks(tasks []Task) error {
-	bytes, err := json.Marshal(tasks)
-	if err != nil {
-		return err
-	}
-	return ioutil.WriteFile("datas/tasks.json", bytes, 0X066)
+	Id           int        `json:"id"`
+	Name         string     `json:"name"`
+	Progress     int        `json:"progress"`
+	User         string     `json:"user"`
+	Desc         string     `json:"desc"`
+	Status       int        `json:"staus"`
+	CreateTime   *time.Time `json:"create_time"`
+	CompleteTime *time.Time `json:"complete_time"`
 }
 
 func GetTasks() []Task {
-	tasks, err := loadTasks()
-	fmt.Println(tasks, err)
-	if err == nil {
-		return tasks
-	}
-	panic(err)
-}
-
-func GetTaskId() (int, error) {
-	tasks, err := loadTasks()
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		return -1, err
+		panic(err)
 	}
-	var id int
-	for _, task := range tasks {
-		if id < task.Id {
-			id = task.Id
+	if err := db.Ping(); err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	rows, err := db.Query("select id, name, progress, user, `desc`, status, create_time, complete_time from todolist_task")
+	if err != nil {
+		panic(err)
+	}
+
+	tasks := make([]Task, 0)
+	for rows.Next() {
+		var task Task
+		if err := rows.Scan(&task.Id, &task.Name, &task.Progress, &task.User, &task.Desc, &task.Status, &task.CreateTime, &task.CompleteTime); err == nil {
+			tasks = append(tasks, task)
+		} else {
+			fmt.Println(err)
 		}
+
 	}
-	return id + 1, nil
+	return tasks
 }
 
 func CreateTask(name, user, desc string) {
-	id, err := GetTaskId()
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
 	}
-	task := Task{
-		Id:       id,
-		Name:     name,
-		User:     user,
-		Desc:     desc,
-		Progress: 0,
-		Status:   "new",
+	if err := db.Ping(); err != nil {
+		panic(err)
 	}
-	tasks, err := loadTasks()
+
+	defer db.Close()
+
+	_, err = db.Exec("insert into todolist_task(name, user, `desc`, create_time) values(?, ?, ?, ?)", name, user, desc, time.Now())
+
 	if err != nil {
 		panic(err)
 	}
-	tasks = append(tasks, task)
-	storeTasks(tasks)
 }
 
 func GetTaskById(id int) (Task, error) {
-	tasks, err := loadTasks()
+	var task Task
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		panic(err)
+		return task, err
 	}
-	for _, task := range tasks {
-		if id == task.Id {
-			return task, nil
-		}
+	if err := db.Ping(); err != nil {
+		return task, err
 	}
-	return Task{}, errors.New("Not Found")
+	defer db.Close()
+
+	row := db.QueryRow("select id, name, progress, user, `desc`, status, create_time, complete_time from todolist_task where id=?", id)
+
+	err = row.Scan(&task.Id, &task.Name, &task.Progress, &task.User, &task.Desc, &task.Status, &task.CreateTime, &task.CompleteTime)
+
+	fmt.Println(err, task)
+	return task, err
 }
 
-func ModifyTask(id int, name, desc string, progress int, user, status string) {
-	tasks, err := loadTasks()
+func ModifyTask(id int, name, desc string, progress int, user string, status int) {
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		panic(err)
+	}
+	if err := db.Ping(); err != nil {
+		panic(err)
+	}
+
+	defer db.Close()
+
+	_, err = db.Exec("update todolist_task set name=?, `desc`=?, progress=?, user=?, status=? where id=?",
+		name, desc, progress, user, status, id)
+
 	if err != nil {
 		panic(err)
 	}
 
-	newTasks := make([]Task, len(tasks))
-	for i, task := range tasks {
-		if id == task.Id {
-			task.Name = name
-			task.Desc = desc
-			task.Progress = progress
-			task.User = user
-			task.Status = status
-		}
-		newTasks[i] = task
-	}
-	storeTasks(newTasks)
 }
 
 func DeleteTask(id int) {
-	tasks, err := loadTasks()
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println(id)
-	newTasks := make([]Task, 0)
-	for _, task := range tasks {
-		if id != task.Id {
-			newTasks = append(newTasks, task)
-		} else {
-			fmt.Println(task)
-		}
+	if err := db.Ping(); err != nil {
+		panic(err)
 	}
-	fmt.Println(storeTasks(newTasks))
+
+	defer db.Close()
+
+	_, err = db.Exec("delete from todolist_task where id=?", id)
+
+	if err != nil {
+		panic(err)
+	}
 }

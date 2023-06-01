@@ -77,7 +77,10 @@ func TaskModifyAction(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusBadRequest)
 		}
 		user := r.PostFormValue("user")
-		status := r.PostFormValue("status")
+		status, err := strconv.Atoi(r.PostFormValue("status"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+		}
 
 		models.ModifyTask(id, name, desc, progress, user, status)
 
