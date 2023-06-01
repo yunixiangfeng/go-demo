@@ -114,3 +114,27 @@ func (f *AlertQueryParams) EndTime() *time.Time {
 	}
 	return nil
 }
+
+type AlertGroupForm struct {
+	Version           string            `json:"version"`
+	GroupKey          string            `json:"groupKey"`
+	TruncatedAlerts   int               `json:"truncatedAlerts"`
+	Status            string            `json:"status"`
+	Receiver          string            `json:"receiver"`
+	GroupLabels       map[string]string `json:"groupLabels"`
+	CommonLabels      map[string]string `json:"commonLabels"`
+	CommonAnnotations map[string]string `json:"commonAnnotations"`
+	ExternalURL       string            `json:"externalURL"`
+	Alerts            []*AlertForm      `json:"alerts"`
+}
+
+func (f *AlertGroupForm) AlertName() string {
+	return f.GroupLabels["alertname"]
+}
+
+func (f *AlertGroupForm) GroupLabelsString() string {
+	if bytes, err := json.Marshal(f.GroupLabels); err == nil {
+		return string(bytes)
+	}
+	return "{}"
+}

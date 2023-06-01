@@ -6,9 +6,6 @@ import (
 	"cmdb/forms"
 	"cmdb/services"
 	"encoding/json"
-	"fmt"
-
-	"github.com/tidwall/gjson"
 )
 
 type PrometheusController struct {
@@ -45,14 +42,25 @@ func (c *PrometheusController) Config() {
 }
 
 func (c *PrometheusController) Alert() {
-	fmt.Println(string(c.Ctx.Input.RequestBody))
-	gjson.GetBytes(c.Ctx.Input.RequestBody, "alerts").ForEach(func(key, alert gjson.Result) bool {
-		var form forms.AlertForm
-		if err := json.Unmarshal([]byte(alert.Raw), &form); err == nil {
-			services.AlertService.Alert(&form)
-		} else {
-			fmt.Println(err)
+	var form forms.AlertGroupForm
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &form); err == nil {
+		// 处理告警组
+		services.AlertService.Notice(&form)
+		// 处理告警
+		for _, alert := range form.Alerts {
+			services.AlertService.Alert(alert)
 		}
-		return true
-	})
+	}
+
+	c.Data["json"] = response.NewJsonResponse(200, "ok", nil)
+	// fmt.Println(string(c.Ctx.Input.RequestBody))
+	// gjson.GetBytes(c.Ctx.Input.RequestBody, "alerts").ForEach(func(key, alert gjson.Result) bool {
+	// 	var form forms.AlertForm
+	// 	if err := json.Unmarshal([]byte(alert.Raw), &form); err == nil {
+	// 		services.AlertService.Alert(&form)
+	// 	} else {
+	// 		fmt.Println(err)
+	// 	}
+	// 	return true
+	// })
 }

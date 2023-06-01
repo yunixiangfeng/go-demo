@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -277,6 +278,21 @@ func (s *alertService) Query(form *forms.AlertQueryParams) *utils.Page {
 	total, _ := queryset.SetCond(cond).Count()
 	// NewPage(alerts, total, form.PageQueryParams)
 	return utils.NewPage(alerts, total, form.PageSize(), form.PageNum(), form.Inputs)
+}
+
+func (s *alertService) Notice(form *forms.AlertGroupForm) {
+	// 告警永远通知个某个，某些人，某个群组 => 通知所有运维人员
+	// 业务发生故障 => 通知业务负责人
+	// 告警分组 => 业务 ==> cmdb 业务 => 负责人 (告警规则)
+	tos := beego.AppConfig.DefaultStrings("notice::mailTos", []string{})
+	subject := form.AlertName()
+
+	phones := beego.AppConfig.DefaultStrings("notice::phones", []string{})
+	templateId := beego.AppConfig.DefaultString("notice::templateId", "")
+	templateParams := []string{form.AlertName(), "账户余额", "CMDB"}
+
+	utils.SendMail(tos, subject, utils.FormatEmailBody("views/email/alert.html", form))
+	utils.SendSms(phones, templateId, templateParams)
 }
 
 var (
