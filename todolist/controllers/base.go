@@ -40,7 +40,16 @@ func (c *LoginRequiredController) Prepare() {
 		}
 	}
 	if c.User == nil {
-		// 用户未登陆则跳转到登陆控制器，并使用next参数传递请求的url
-		c.Redirect(beego.URLFor(beego.AppConfig.String("login"), "next", c.Ctx.Input.URL()), http.StatusFound)
+		if c.Ctx.Input.IsAjax() {
+			c.Data["json"] = map[string]interface{}{
+				"code": 403,
+				"text": "未认证",
+			}
+			c.ServeJSON()
+		} else {
+			// 用户未登陆则跳转到登陆控制器，并使用next参数传递请求的url
+			c.Redirect(beego.URLFor(beego.AppConfig.String("login"), "next", c.Ctx.Input.URL()), http.StatusFound)
+		}
+
 	}
 }

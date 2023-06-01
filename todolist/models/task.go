@@ -24,20 +24,18 @@ var TaskStatusTexts = map[int]string{
 
 // 定义任务模型
 type Task struct {
-	Id           int
-	Name         string     `orm:"type(varchar);size(256);default();"` // 任务名
-	Progress     int        `orm:"default(0);"`                        //进度
-	Worker       string     `orm:"type(varchar);size(32);default();"`  //执行者（负责人）
-	CreateUser   int        `orm:"default(0);"`                        // 创建人
-	Desc         string     `orm:"type(varchar);size(512);default();"` //描述
-	Status       int        `orm:"default(0);"`                        //状态
-	CreateTime   *time.Time `orm:"type(datetime);auto_now_add;"`       // 创建时间，在创建时自动设置（auto_now_add）
-	CompleteTime *time.Time `orm:"type(datetime);null;"`               //完成时间，允许为null
-}
+	Id           int        `json:"id"`
+	Name         string     `orm:"type(varchar);size(256);default();" json:"name"`  // 任务名
+	Progress     int        `orm:"default(0);" json:"progress"`                     //进度
+	Worker       string     `orm:"type(varchar);size(32);default();" json:"worker"` //执行者（负责人）
+	CreateUser   int        `orm:"default(0);" json:"create_user"`                  // 创建人
+	Desc         string     `orm:"type(varchar);size(512);default();" json:"desc"`  //描述
+	Status       int        `orm:"default(0);" json:"status"`                       //状态
+	CreateTime   *time.Time `orm:"type(datetime);auto_now_add;" json:"create_time"` // 创建时间，在创建时自动设置（auto_now_add）
+	CompleteTime *time.Time `orm:"type(datetime);null;" json:"complete_time"`       //完成时间，允许为null
 
-// 获取任务状态中文
-func (t *Task) StatusText() string {
-	return TaskStatusTexts[t.Status]
+	User       *User  `orm:"-" json:"create_user_object"`
+	StatusText string `orm:"-" json:"status_text"`
 }
 
 // 获取创建者用户名
@@ -48,6 +46,15 @@ func (t *Task) CreateUserName() string {
 		return user.Name
 	}
 	return "未知"
+}
+
+func (t *Task) Patch() {
+	ormer := orm.NewOrm()
+	user := &User{Id: t.CreateUser}
+	if ormer.Read(user) == nil {
+		t.User = user
+	}
+	t.StatusText = TaskStatusTexts[t.Status]
 }
 
 func init() {

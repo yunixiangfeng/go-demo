@@ -17,35 +17,8 @@ type TaskController struct {
 	LoginRequiredController
 }
 
-// func (c *TaskController) Prepare() {
-// 	c.LoginRequiredController.Prepare()
-
-// 	c.Layout = "layout/base.html" // 设置layout
-// 	c.Data["nav"] = "task"        // 设置菜单
-// }
-
 // 任务列表
 func (c *TaskController) Index() {
-	q := strings.TrimSpace(c.GetString("q", ""))
-
-	var tasks []models.Task
-
-	// 创建查询条件
-	condition := orm.NewCondition()
-	if q != "" {
-		// 查询名称和描述中包含字符
-		condition = condition.Or("name__icontains", q)
-		condition = condition.Or("desc__icontains", q)
-		condition = condition.AndCond(condition)
-	}
-
-	// 若非超级管理员只查看当前用户任务
-	if !c.User.IsSuper {
-		condition = condition.And("create_user__exact", c.User.Id)
-	}
-
-	orm.NewOrm().QueryTable(&models.Task{}).SetCond(condition).All(&tasks)
-
 	c.Layout = "layout/base.html" // 设置layout
 	c.Data["nav"] = "task"        // 设置菜单
 	c.LayoutSections = map[string]string{}
@@ -53,9 +26,81 @@ func (c *TaskController) Index() {
 
 	c.TplName = "task/index.html"
 	c.Data["xsrf_token"] = c.XSRFToken() // csrftoken
-	c.Data["tasks"] = tasks
-	c.Data["q"] = q
 	c.Data["statusTexts"] = models.TaskStatusTexts
+}
+
+func (c *TaskController) List() {
+	orderByColumns := map[string]bool{
+		"id":       true,
+		"name":     true,
+		"status":   true,
+		"progress": true,
+		"worker":   true,
+	}
+
+	draw := c.GetString("draw")
+	start, err := c.GetInt("start")
+	if err != nil {
+		start = 0
+	}
+	length, err := c.GetInt("length")
+	if err != nil {
+		length = 10
+	}
+	q := strings.TrimSpace(c.GetString("q", ""))
+
+	orderBy := c.GetString("orderBy")
+	if _, ok := orderByColumns[orderBy]; !ok {
+		orderBy = "id"
+	}
+	orderDir := c.GetString("orderDir")
+
+	if orderDir == "desc" {
+		orderBy = "-" + orderBy
+	}
+
+	var tasks []*models.Task
+
+	// 创建查询条件
+	condition := orm.NewCondition()
+
+	// 若非超级管理员只查看当前用户任务
+	if !c.User.IsSuper {
+		condition = condition.And("create_user__exact", c.User.Id)
+	}
+
+	ormer := orm.NewOrm()
+	queryset := ormer.QueryTable("task")
+	total, _ := queryset.SetCond(condition).Count()
+
+	totalFilter := total
+
+	if q != "" {
+		qcondition := orm.NewCondition()
+		// 查询名称和描述中包含字符
+		qcondition = qcondition.Or("name__icontains", q)
+		qcondition = qcondition.Or("desc__icontains", q)
+		qcondition = qcondition.Or("worker__icontains", q)
+
+		condition = condition.AndCond(qcondition)
+
+		totalFilter, _ = queryset.SetCond(condition).Count()
+	}
+
+	queryset.SetCond(condition).OrderBy(orderBy).Limit(length).Offset(start).All(&tasks)
+
+	for _, task := range tasks {
+		task.Patch()
+	}
+	c.Data["json"] = map[string]interface{}{
+		"code":            200,
+		"text":            "获取任务成功",
+		"result":          tasks,
+		"draw":            draw,
+		"recordsTotal":    total,
+		"recordsFiltered": totalFilter,
+	}
+	c.ServeJSON()
 }
 
 // 任务创建
@@ -203,12 +248,12 @@ func (c *TaskController) Delete() {
 		task := models.Task{Id: id}
 		if ormer.Read(&task) == nil && (c.User.IsSuper || task.CreateUser == c.User.Id) {
 			ormer.Delete(&task) // 任务删除
-
-			//通过flash提示操作结果
-			flash := beego.NewFlash()
-			flash.Success("删除任务成功")
-			flash.Store(&c.Controller)
 		}
 	}
-	c.Redirect(beego.URLFor("TaskController.Index"), http.StatusFound)
+
+	c.Data["json"] = map[string]interface{}{
+		"code": 200,
+		"text": "success",
+	}
+	c.ServeJSON()
 }
