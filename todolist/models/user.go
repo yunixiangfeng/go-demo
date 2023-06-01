@@ -1,7 +1,6 @@
 package models
 
 import (
-	"database/sql"
 	"encoding/json"
 	"io/ioutil"
 	"os"
@@ -9,18 +8,21 @@ import (
 	"time"
 
 	"todolist/utils"
+
+	"github.com/jinzhu/gorm"
 )
 
 type User struct {
-	Id         int
-	Name       string
-	Password   string
-	Birthday   time.Time
-	Sex        bool
-	Tel        string
-	Addr       string
-	Desc       string
-	CreateTime time.Time
+	gorm.Model
+
+	Name       string    `gorm:"type:varchar(32); not null; default:'' "`
+	Password   string    `gorm:"type:varchar(1024); not null; default:'' "`
+	Birthday   time.Time `gorm:"type:date; not null"`
+	Sex        bool      `gorm:"not null; default:false"`
+	Tel        string    `gorm:"type:varchar(16); not null; default:''"`
+	Addr       string    `gorm:"type:varchar(512); not null; default:''"`
+	Desc       string    `gorm:"column:description; type:text; not null; default:''"`
+	CreateTime time.Time `gorm:"column:create_time; type:datetime"`
 }
 
 func (u User) ValidatePassword(password string) bool {
@@ -70,18 +72,7 @@ func GetUsers(q string) []User {
 
 func GetUserByName(name string) (User, error) {
 	var user User
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		return user, err
-	}
-
-	if err := db.Ping(); err != nil {
-		return user, err
-	}
-	defer db.Close()
-
-	row := db.QueryRow("select id,name,password,birthday,sex,tel,addr,create_time from todolist_user where name=?", name)
-	err = row.Scan(&user.Id, &user.Name, &user.Password, &user.Birthday, &user.Sex, &user.Tel, &user.Addr, &user.CreateTime)
+	err := db.First(&user, "name=?", name).Error
 	return user, err
 }
 
@@ -121,7 +112,6 @@ func CreateUser(name, password, birthday, tel, addr, desc string) {
 	day, _ := time.Parse("2006-01-02", birthday)
 
 	user := User{
-		Id:       id,
 		Name:     name,
 		Password: utils.Md5(password),
 		Birthday: day,
