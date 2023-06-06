@@ -106,3 +106,50 @@
 2023/06/05 14:49:37.062 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      3.135ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
 2023/06/05 14:49:48.256 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.9318ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
 2023/06/05 14:50:34.844 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    31.3049ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/06 11:26:47.915 [I] [asm_amd64.s:1571]  http server Running on http://:8080
+2023/06/06 11:26:47.916 [I] [asm_amd64.s:1571]  https server Running on https://:443
+2023/06/06 11:27:05.172 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.6696ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
+2023/06/06 11:27:05.247 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      996.8µs|   match|[44m GET     [0m /static/components/bootstrap-4.5.0/css/bootstrap.min.css
+2023/06/06 11:27:05.256 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.6601ms|   match|[44m GET     [0m /static/css/login.css
+2023/06/06 11:27:05.357 [D] [server.go:2916]  |            ::1|[43m 404 [0m|    10.3268ms| nomatch|[44m GET     [0m /favicon.ico
+2023/06/06 11:27:09.310 [I] [auth.go:48]  用户认证成功: admin 
+2023/06/06 11:27:09.312 [D] [server.go:2916]  |            ::1|[47m 302 [0m|   108.5461ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
+2023/06/06 11:27:09.337 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    19.9876ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:09.382 [D] [server.go:2916]  |            ::1|[42m 200 [0m|           0s|   match|[44m GET     [0m /static/css/layout.css
+2023/06/06 11:27:09.388 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      524.4µs|   match|[44m GET     [0m /static/components/jquery/jquery-3.5.1.min.js
+2023/06/06 11:27:09.390 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.8018ms|   match|[44m GET     [0m /static/components/bootstrap-4.5.0/js/bootstrap.bundle.min.js
+2023/06/06 11:27:11.390 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    19.0547ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:11.939 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    24.7641ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:12.101 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.9394ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:12.243 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    17.7425ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:12.388 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    17.1177ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:12.558 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     13.074ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:12.887 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.0893ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:13.039 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.0259ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:13.203 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     17.161ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:13.351 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     13.736ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:16.189 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    27.9341ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:16.368 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.1673ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:16.547 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.7792ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:16.727 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    23.5129ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:16.876 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.0453ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:27:17.094 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     13.139ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:28:43.806 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    32.3925ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/06 11:28:45.858 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    60.3879ms|   match|[44m GET     [0m /deployment/query   r:/deployment/query/*
+2023/06/06 11:28:52.619 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    45.8218ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:28:59.424 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    47.6662ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:02.601 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    39.6716ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:04.337 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    39.8445ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:05.396 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    36.0362ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:06.973 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    45.1192ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:08.144 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    37.1539ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:09.152 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    40.6059ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:10.585 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    40.4619ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:11.671 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    39.1152ms|   match|[44m GET     [0m /deployment/create   r:/deployment/create/*
+2023/06/06 11:29:12.958 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    47.1347ms|   match|[44m GET     [0m /deployment/query   r:/deployment/query/*
+2023/06/06 11:29:28.845 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    53.1167ms|   match|[44m GET     [0m /deployment/query   r:/deployment/query/*
+2023/06/06 11:29:53.011 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    40.1865ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/06 11:29:54.946 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     39.365ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/06 11:29:56.335 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    44.2396ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/06 11:29:57.505 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    44.6992ms|   match|[44m GET     [0m /alert/query   r:/alert/query/*
+2023/06/06 11:29:58.661 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    31.0951ms|   match|[44m GET     [0m /node/query   r:/node/query/*
