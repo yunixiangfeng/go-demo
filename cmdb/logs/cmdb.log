@@ -1,320 +1,108 @@
-2023/05/17 15:31:48.484 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/05/17 15:32:27.261 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/05/17 15:32:27.262 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/05/17 15:32:34.831 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.6434ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/05/17 15:32:34.861 [D] [server.go:2916]  |            ::1|[47m 304 [0m|      827.1µs|   match|[44m GET     [0m /static/components/bootstrap-4.5.0/css/bootstrap.min.css
-2023/05/17 15:32:34.864 [D] [server.go:2916]  |            ::1|[47m 304 [0m|     2.0309ms|   match|[44m GET     [0m /static/css/login.css
-2023/05/17 15:34:22.133 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     1.4014ms|   match|[44m GET     [0m /     r:/
-2023/05/17 15:34:22.234 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.2654ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/05/17 15:34:26.444 [I] [auth.go:48]  用户认证成功: wu 
-2023/05/17 15:34:26.445 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    123.305ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
-2023/05/17 15:34:26.459 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.6176ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:26.489 [D] [server.go:2916]  |            ::1|[47m 304 [0m|      996.6µs|   match|[44m GET     [0m /static/css/layout.css
-2023/05/17 15:34:32.688 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.0418ms|   match|[44m GET     [0m /user/modify   r:/user/modify/*
-2023/05/17 15:34:34.517 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    16.2746ms|   match|[46m POST    [0m /user/modify   r:/user/modify/*
-2023/05/17 15:34:34.528 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.4995ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:43.132 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.2066ms|   match|[44m GET     [0m /password/modify   r:/password/modify/*
-2023/05/17 15:34:45.121 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.2317ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/05/17 15:34:46.364 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.7429ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:47.839 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.9146ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/05/17 15:34:48.471 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.3936ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:49.522 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.9899ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:50.821 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.1331ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:51.500 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      11.33ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:52.017 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.097ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:52.185 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.5672ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:52.346 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.671ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:52.489 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.8881ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:52.796 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.3007ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:52.953 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.8403ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:53.105 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.6338ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:53.274 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.5572ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:53.449 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.4473ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/05/17 15:34:57.783 [D] [server.go:2916]  |            ::1|[47m 302 [0m|      844.4µs|   match|[44m GET     [0m /auth/logout   r:/auth/logout/*
-2023/05/17 15:34:57.789 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      3.823ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 12:25:32.308 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/06/01 12:25:32.310 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/06/01 12:26:03.441 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     2.9263ms|   match|[44m GET     [0m /     r:/
-2023/06/01 12:26:03.448 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.9152ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 12:26:03.484 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      506.4µs|   match|[44m GET     [0m /static/css/login.css
-2023/06/01 12:26:03.727 [D] [server.go:2916]  |            ::1|[42m 200 [0m|   244.6967ms|   match|[44m GET     [0m /static/components/bootstrap-4.5.0/css/bootstrap.min.css
-2023/06/01 12:26:03.783 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     3.9702ms| nomatch|[44m GET     [0m /favicon.ico
-2023/06/01 12:28:05.011 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     1.8909ms|   match|[44m GET     [0m /     r:/
-2023/06/01 12:28:05.017 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.9593ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 20:50:14.236 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/06/01 20:50:14.237 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/06/01 20:50:20.724 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     2.2585ms|   match|[44m GET     [0m /     r:/
-2023/06/01 20:50:20.731 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.9507ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 20:50:26.927 [I] [auth.go:48]  用户认证成功: admin 
-2023/06/01 20:50:26.928 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     86.404ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
-2023/06/01 20:50:27.056 [D] [server.go:2916]  |            ::1|[42m 200 [0m|   126.6032ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:27.100 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      605.9µs|   match|[44m GET     [0m /static/css/layout.css
-2023/06/01 20:50:44.302 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.8895ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:50:45.143 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.7977ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:45.983 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.2266ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:50:46.535 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.4807ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:47.083 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.4227ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:50:47.582 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.4503ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:48.139 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.4243ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:50:48.686 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.7008ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:49.840 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.4556ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:51.337 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.1534ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:51.866 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    66.1295ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:52.021 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.7031ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:52.204 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.3607ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:53.104 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.1565ms|   match|[44m GET     [0m /user/modify   r:/user/modify/*
-2023/06/01 20:50:55.243 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.2971ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:50:56.205 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      7.278ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:57.503 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.3838ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:50:59.981 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.7748ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:51:01.636 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     1.1456ms|   match|[44m GET     [0m /auth/logout   r:/auth/logout/*
-2023/06/01 20:51:01.643 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.5544ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 20:51:15.941 [E] [auth.go:45]  用户认证失败: wu 
-2023/06/01 20:51:15.946 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.4895ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
-2023/06/01 20:51:57.800 [I] [auth.go:48]  用户认证成功: admin 
-2023/06/01 20:51:57.800 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    87.0556ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
-2023/06/01 20:51:57.811 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.1602ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 20:52:00.228 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.3988ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:52:01.670 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.9374ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 20:52:03.834 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.3778ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:22:06.871 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/06/01 21:22:06.873 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/06/01 21:22:17.351 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:17.351 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.5858ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:22:19.922 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:19.922 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.0943ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:22:20.490 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:20.490 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.3135ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:22:20.703 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:20.703 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.4329ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:22:20.923 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:20.923 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.9465ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:22:23.589 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     6.7619ms| nomatch|[44m GET     [0m /user/
-2023/06/01 21:22:26.580 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:26.580 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:26.580 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.3948ms|   match|[44m GET     [0m /     r:/
-2023/06/01 21:22:50.779 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:50.779 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:22:50.779 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.0237ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:22:54.552 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     4.6319ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:56.517 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     1.9259ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:57.012 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.4377ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:57.349 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.4512ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:57.532 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.2041ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:57.685 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.8326ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:58.149 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.4758ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:58.380 [D] [server.go:2916]  |            ::1|[43m 404 [0m|      2.612ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:58.613 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.3964ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:58.996 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.0759ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:59.189 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.3483ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:59.365 [D] [server.go:2916]  |            ::1|[43m 404 [0m|        2.2ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:59.527 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     3.5397ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:24:59.701 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     2.4555ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:25:02.439 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:25:02.439 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:25:02.439 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.3565ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:25:02.608 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:25:02.608 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:25:02.608 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.5446ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:25:02.814 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:25:02.814 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:25:02.814 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.6593ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:26:37.750 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:37.750 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:37.750 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      4.515ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:26:38.202 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.202 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.202 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.4451ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:26:38.370 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.370 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.370 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.1365ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:26:38.540 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.540 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.540 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.2435ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:26:38.802 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.802 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:38.802 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.3669ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:26:41.084 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:41.084 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:41.084 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.3623ms|   match|[44m GET     [0m /     r:/
-2023/06/01 21:26:42.512 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:42.512 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:42.512 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.2826ms|   match|[44m GET     [0m /     r:/
-2023/06/01 21:26:42.983 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:42.983 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:42.983 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.8252ms|   match|[44m GET     [0m /     r:/
-2023/06/01 21:26:43.211 [D] [controller.go:306]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:43.211 [E] [server.go:2916]  template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:26:43.212 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.7976ms|   match|[44m GET     [0m /     r:/
-2023/06/01 21:29:41.577 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     1.6893ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 21:29:41.590 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:29:41.590 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.4348ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:29:45.630 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:29:45.630 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.9129ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:29:46.157 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:29:46.157 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.1942ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:29:49.123 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:29:49.123 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      7.692ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:29:52.945 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     3.7576ms| nomatch|[44m GET     [0m /user/
-2023/06/01 21:30:00.331 [D] [server.go:2916]  |            ::1|[43m 404 [0m|       2.14ms| nomatch|[44m GET     [0m /home/
-2023/06/01 21:30:11.087 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     2.3032ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
-2023/06/01 21:30:11.097 [D] [controller.go:278]  template Execute err: template: base/templates/nav.html:8:38: executing "base/templates/nav.html" at <eq .nav `home`>: error calling eq: invalid type for comparison
-2023/06/01 21:30:11.098 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.2882ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:02.081 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/06/01 21:35:02.084 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/06/01 21:35:12.899 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.7528ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:12.925 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.3039ms|   match|[44m GET     [0m /static/components/jquery/jquery-3.5.1.min.js
-2023/06/01 21:35:12.926 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      522.3µs|   match|[44m GET     [0m /static/components/bootstrap-4.5.0/js/bootstrap.bundle.min.js
-2023/06/01 21:35:17.988 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    13.7767ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:18.693 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.4065ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:18.894 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.8069ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:19.219 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.5258ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:19.433 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.3284ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:19.633 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.1386ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:20.257 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.2348ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:20.774 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      9.544ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 21:35:21.597 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.2766ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 21:35:23.187 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.2896ms|   match|[44m GET     [0m /node/query   r:/node/query/*
-2023/06/01 21:35:25.584 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.7432ms|   match|[44m GET     [0m /node/query   r:/node/query/*
-2023/06/01 21:35:27.463 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.9467ms|   match|[44m GET     [0m /job/query   r:/job/query/*
-2023/06/01 21:35:29.711 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.8264ms|   match|[44m GET     [0m /job/create   r:/job/create/*
-2023/06/01 21:35:33.206 [C] [panic.go:838]  the request url is  /job/create
-2023/06/01 21:35:33.206 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.node' doesn't exist
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:360
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm.go:129
-2023/06/01 21:35:33.206 [C] [panic.go:838]  C:/Users/Administrator/Desktop/cmdb/services/prometheus.go:55
-2023/06/01 21:35:33.206 [C] [panic.go:838]  C:/Users/Administrator/Desktop/cmdb/services/prometheus.go:114
-2023/06/01 21:35:33.206 [C] [panic.go:838]  C:/Users/Administrator/Desktop/cmdb/controllers/prometheus.go:69
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
-2023/06/01 21:35:33.206 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
-2023/06/01 21:35:33.206 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
-2023/06/01 21:35:38.124 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.1703ms|   match|[44m GET     [0m /job/create   r:/job/create/*
-2023/06/01 21:35:40.180 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.0594ms|   match|[44m GET     [0m /target/query   r:/target/query/*
-2023/06/01 21:35:41.294 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.4578ms|   match|[44m GET     [0m /target/create   r:/target/create/*
-2023/06/01 21:35:43.045 [C] [panic.go:838]  the request url is  /target/create
-2023/06/01 21:35:43.045 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.job' doesn't exist
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:360
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm.go:129
-2023/06/01 21:35:43.045 [C] [panic.go:838]  C:/Users/Administrator/Desktop/cmdb/services/prometheus.go:95
-2023/06/01 21:35:43.045 [C] [panic.go:838]  C:/Users/Administrator/Desktop/cmdb/services/prometheus.go:189
-2023/06/01 21:35:43.045 [C] [panic.go:838]  C:/Users/Administrator/Desktop/cmdb/controllers/prometheus.go:131
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
-2023/06/01 21:35:43.045 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
-2023/06/01 21:35:43.045 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
-2023/06/01 21:35:57.742 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.8929ms|   match|[44m GET     [0m /target/create   r:/target/create/*
-2023/06/01 21:36:53.322 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.4967ms|   match|[44m GET     [0m /job/query   r:/job/query/*
-2023/06/01 21:36:54.592 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.252ms|   match|[44m GET     [0m /node/query   r:/node/query/*
-2023/06/01 22:01:29.611 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/06/01 22:01:29.614 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/06/01 22:01:36.007 [D] [server.go:2916]  |            ::1|[42m 200 [0m|   380.4793ms|   match|[44m GET     [0m /node/query   r:/node/query/*
-2023/06/01 22:01:37.105 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.3514ms|   match|[44m GET     [0m /node/query   r:/node/query/*
-2023/06/01 22:01:39.913 [C] [panic.go:838]  the request url is  /alert/query
-2023/06/01 22:01:39.914 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:277
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
-2023/06/01 22:01:39.915 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
-2023/06/01 22:01:39.916 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
-2023/06/01 22:01:45.996 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.2394ms|   match|[44m GET     [0m /node/query   r:/node/query/*
-2023/06/01 22:01:47.337 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.0487ms|   match|[44m GET     [0m /job/query   r:/job/query/*
-2023/06/01 22:01:48.907 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.915ms|   match|[44m GET     [0m /target/query   r:/target/query/*
-2023/06/01 22:01:50.052 [C] [panic.go:838]  the request url is  /alert/query
-2023/06/01 22:01:50.060 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:277
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
-2023/06/01 22:01:50.061 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
-2023/06/01 22:01:50.062 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
-2023/06/01 22:01:55.370 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.1934ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:01:56.181 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.8899ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:01:56.851 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.7074ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:01:57.386 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.3132ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:01:58.657 [C] [panic.go:838]  the request url is  /alert/query
-2023/06/01 22:01:58.657 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
-2023/06/01 22:01:58.657 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
-2023/06/01 22:01:58.657 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
-2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
-2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
-2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:277
-2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
-2023/06/01 22:01:58.658 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
-2023/06/01 22:01:58.660 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
-2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
-2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
-2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
-2023/06/01 22:01:58.661 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
-2023/06/01 22:01:58.662 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
-2023/06/01 22:26:03.636 [I] [asm_amd64.s:1571]  http server Running on http://:8080
-2023/06/01 22:26:03.638 [I] [asm_amd64.s:1571]  https server Running on https://:443
-2023/06/01 22:26:08.317 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.5015ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:09.023 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.9302ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:09.288 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.7413ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:09.656 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.2042ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:09.830 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.1239ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:10.039 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.8141ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:10.214 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      9.407ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:10.373 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.6787ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:10.540 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.3648ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:10.740 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.1353ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:10.925 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.1656ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:11.117 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    16.1264ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:11.288 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.3877ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:11.471 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.4706ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:11.643 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.7313ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:11.814 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.6055ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:11.983 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      9.963ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:12.173 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.9891ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:12.368 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.5518ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:12.551 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.3745ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:12.711 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.4787ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:12.908 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.5833ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:13.570 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.9858ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:26:14.500 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.3262ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:26:14.927 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.0264ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:26:15.112 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.896ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:26:15.704 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      9.865ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:26:16.105 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.4768ms|   match|[44m GET     [0m /home/index   r:/home/index/*
-2023/06/01 22:26:16.424 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     11.343ms|   match|[44m GET     [0m /user/query   r:/user/query/*
-2023/06/01 22:26:19.117 [C] [panic.go:838]  the request url is  /alert/query
-2023/06/01 22:26:19.117 [C] [panic.go:838]  Handler crashed with error Error 1146: Table 'cmdb.alert' doesn't exist
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/panic.go:838
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db_alias.go:205
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/db.go:1171
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/orm/orm_queryset.go:188
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/services/prometheus.go:278
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Workspace/Go/src/go-demo/cmdb/controllers/prometheus.go:175
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:556
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Program Files/GO/src/reflect/value.go:339
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Workspace/Go/pkg/mod/github.com/astaxie/beego@v1.12.2/router.go:891
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:2916
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Program Files/GO/src/net/http/server.go:1966
-2023/06/01 22:26:19.117 [C] [panic.go:838]  D:/Program Files/GO/src/runtime/asm_amd64.s:1571
-2023/06/01 22:26:19.117 [server.go:3195]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2023/06/05 11:08:11.447 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.8364ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
+2023/06/05 11:08:19.341 [I] [auth.go:48]  用户认证成功: admin 
+2023/06/05 11:08:19.342 [D] [server.go:2916]  |            ::1|[47m 302 [0m|   112.5453ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
+2023/06/05 11:08:19.367 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    19.4527ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/05 11:08:22.733 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      17.15ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:08:25.296 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    22.1872ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:08:26.209 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    22.4071ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:41:24.995 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    23.1278ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:47:51.589 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     10.948ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:48:17.357 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.8906ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:48:18.379 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.8978ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:48:24.104 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    19.5982ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 11:48:25.153 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.6926ms|   match|[44m GET     [0m /target/create   r:/target/create/*
+2023/06/05 11:48:27.628 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.3083ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:48:28.531 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.9789ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:49:10.883 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    13.0426ms|   match|[44m GET     [0m /node/delete   r:/node/delete/*
+2023/06/05 11:49:10.903 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.6996ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:49:54.223 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    16.9408ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:51:31.341 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     9.9893ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:51:32.366 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.2977ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:51:38.941 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    11.5962ms|   match|[46m POST    [0m /job/create   r:/job/create/*
+2023/06/05 11:51:38.964 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.5417ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:51:43.754 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.4588ms|   match|[44m GET     [0m /job/modify   r:/job/modify/*
+2023/06/05 11:51:46.755 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    16.0218ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 11:51:47.873 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.6496ms|   match|[44m GET     [0m /target/create   r:/target/create/*
+2023/06/05 11:51:54.629 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.2851ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:53:15.230 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    16.6407ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:53:20.725 [D] [server.go:2916]  |            ::1|[47m 302 [0m|   142.9895ms|   match|[46m POST    [0m /job/create   r:/job/create/*
+2023/06/05 11:53:20.741 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.6954ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:53:23.984 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    19.1381ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:53:32.835 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    11.6313ms|   match|[46m POST    [0m /job/create   r:/job/create/*
+2023/06/05 11:53:32.852 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    11.3776ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:53:37.608 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    21.0018ms|   match|[44m GET     [0m /job/modify   r:/job/modify/*
+2023/06/05 11:53:40.235 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    16.7283ms|   match|[46m POST    [0m /job/modify   r:/job/modify/*
+2023/06/05 11:53:40.256 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.1611ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:53:42.125 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    17.9848ms|   match|[44m GET     [0m /job/delete   r:/job/delete/*
+2023/06/05 11:53:42.144 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.2613ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:55:56.148 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    17.3766ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 11:59:18.625 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    30.5616ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:59:19.791 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.6278ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:59:34.553 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    23.7585ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:59:38.796 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     16.932ms|   match|[44m GET     [0m /job/create   r:/job/create/*
+2023/06/05 11:59:46.400 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    21.4576ms|   match|[46m POST    [0m /job/create   r:/job/create/*
+2023/06/05 11:59:46.429 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     20.785ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 11:59:49.648 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    21.8609ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 11:59:50.472 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    22.6806ms|   match|[44m GET     [0m /target/create   r:/target/create/*
+2023/06/05 12:00:16.510 [D] [server.go:2916]  |            ::1|[47m 302 [0m|    39.8356ms|   match|[46m POST    [0m /target/create   r:/target/create/*
+2023/06/05 12:00:16.539 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    25.1617ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 12:01:20.776 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    31.9786ms|   match|[44m GET     [0m /alert/query   r:/alert/query/*
+2023/06/05 14:23:51.208 [D] [server.go:2916]  |            ::1|[43m 404 [0m|     5.8059ms| nomatch|[44m GET     [0m /prometheus/register
+2023/06/05 14:25:25.125 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.0257ms|   match|[44m GET     [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:30:41.015 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      899.1µs|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:31:29.354 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.5212ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:34:03.207 [I] [asm_amd64.s:1571]  http server Running on http://:8080
+2023/06/05 14:34:03.209 [I] [asm_amd64.s:1571]  https server Running on https://:443
+2023/06/05 14:34:11.454 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.4381ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:34:51.471 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     2.3304ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:34:52.615 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.8026ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:34:53.390 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.9943ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:34:54.275 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     2.8959ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:35:02.614 [I] [asm_amd64.s:1571]  http server Running on http://:8080
+2023/06/05 14:35:02.615 [I] [asm_amd64.s:1571]  https server Running on https://:443
+2023/06/05 14:35:07.936 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      3.518ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:35:10.433 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.8326ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:38:16.708 [D] [server.go:2916]  |            ::1|[42m 200 [0m|       5.97ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:38:30.989 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     2.9048ms|   match|[44m GET     [0m /home/index   r:/home/index/*
+2023/06/05 14:38:30.996 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.7687ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
+2023/06/05 14:38:37.591 [D] [server.go:2916]  |            ::1|[47m 302 [0m|     2.8764ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/05 14:38:37.605 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.9596ms|   match|[44m GET     [0m /auth/login   r:/auth/login/*
+2023/06/05 14:38:43.672 [I] [auth.go:48]  用户认证成功: admin 
+2023/06/05 14:38:43.673 [D] [server.go:2916]  |            ::1|[47m 302 [0m|   100.2938ms|   match|[46m POST    [0m /auth/login   r:/auth/login/*
+2023/06/05 14:38:43.694 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    16.9562ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/05 14:38:46.696 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.5443ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 14:38:50.011 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    22.0535ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 14:38:53.305 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    21.2998ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 14:39:08.286 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     2.4518ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:39:16.525 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      1.502ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:39:18.393 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     2.8838ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:39:45.191 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.4081ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:39:46.268 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.5874ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:39:47.139 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.8579ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:41:22.844 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.1735ms|   match|[44m GET     [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:41:37.010 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      1.917ms|   match|[44m GET     [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:41:42.550 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.2506ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:41:52.463 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    14.0048ms|   match|[44m GET     [0m /user/query   r:/user/query/*
+2023/06/05 14:41:55.662 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    21.4354ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 14:41:59.668 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     21.528ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 14:42:02.730 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.5086ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 14:42:12.470 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     8.8774ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:42:21.429 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     1.9528ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:42:31.257 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    10.0662ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:42:50.878 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.9519ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:42:52.754 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     2.4957ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:43:27.856 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     6.9467ms|   match|[46m POST    [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:43:37.770 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     3.0587ms|   match|[46m POST    [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:45:07.312 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      8.151ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:45:30.863 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     2.8194ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:47:02.976 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     4.0316ms|   match|[46m POST    [0m /v1/prometheus/register   r:/v1/prometheus/register/*
+2023/06/05 14:47:12.299 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    17.0147ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 14:47:12.983 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    22.9987ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 14:47:13.150 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    15.3149ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 14:47:13.310 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    12.0367ms|   match|[44m GET     [0m /target/query   r:/target/query/*
+2023/06/05 14:47:15.476 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.9979ms|   match|[44m GET     [0m /node/query   r:/node/query/*
+2023/06/05 14:47:18.223 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    20.3754ms|   match|[44m GET     [0m /job/query   r:/job/query/*
+2023/06/05 14:49:31.842 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     5.7622ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:49:37.062 [D] [server.go:2916]  |            ::1|[42m 200 [0m|      3.135ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:49:48.256 [D] [server.go:2916]  |            ::1|[42m 200 [0m|     7.9318ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*
+2023/06/05 14:50:34.844 [D] [server.go:2916]  |            ::1|[42m 200 [0m|    31.3049ms|   match|[44m GET     [0m /v1/prometheus/config   r:/v1/prometheus/config/*

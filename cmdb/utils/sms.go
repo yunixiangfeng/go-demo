@@ -14,7 +14,7 @@ func SendSms(phones []string, templateId string, templateParams []string) error 
 		beego.AppConfig.DefaultString("tencent_sms::secretId", "AKID44qsOsP1g5GB9qxu1ndW8CzuZIYYfr3y"),
 		beego.AppConfig.DefaultString("tencent_sms::secretKey", "5qYz4uSnrUrJUe5GDvLUheZEcsQYQKyZ"),
 	)
-	sign := beego.AppConfig.DefaultString("tencent_sms::sign", "iamuk网")
+	sign := beego.AppConfig.DefaultString("tencent_sms::sign", "imuk")
 	appId := beego.AppConfig.DefaultString("tencent_sms::appId", "1400287583")
 
 	cpf := profile.NewClientProfile()

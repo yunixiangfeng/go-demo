@@ -34,6 +34,9 @@ func init() {
 	beego.AutoRouter(&controllers.TargetController{})
 	beego.AutoRouter(&controllers.AlertController{})
 
+	// k8s
+	beego.AutoRouter(&controllers.DeploymentController{})
+
 	// /v1/
 	v1 := beego.NewNamespace("/v1", beego.NSAutoRouter(&v1.PrometheusController{}))
 	beego.AddNamespace(v1)

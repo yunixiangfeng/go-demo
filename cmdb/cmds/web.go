@@ -18,9 +18,14 @@ var webCommand = &cobra.Command{
 		beego.SetLogger("file", `{"filename" : "logs/cmdb.log"}`)
 		beego.SetLogFuncCall(true)
 		beego.SetLevel(beego.LevelDebug)
-		beego.BeeLogger.DelLogger("console")
+		// beego.BeeLogger.DelLogger("console")
 
-		config.Init("file", `{"CachePath" : "tmp/cache", "FileSuffix":".cache", "EmbedExpiry" : "60", "DirectoryLevel" : "3"}`)
+		// config.Init("file", `{"CachePath" : "tmp/cache", "FileSuffix":".cache", "EmbedExpiry" : "60", "DirectoryLevel" : "3"}`)
+		if !verbose {
+			beego.BeeLogger.DelLogger("console")
+		}
+
+		config.Init("redis", `{"key":"cmdb:cache","conn":"192.168.204.130:6379","dbNum":"0","password":"mima"}`)
 
 		orm.Debug = verbose
 		dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/cmdb?charset=utf8mb4&loc=PRC&parseTime=true",

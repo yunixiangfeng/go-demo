@@ -28,8 +28,8 @@ func FormatEmailBody(path string, data interface{}) string {
 func SendMail(tos []string, subject, content string) error {
 	smtpAddr := beego.AppConfig.DefaultString("smtp::host", "smtp.qq.com")
 	smtpPort := beego.AppConfig.DefaultInt("smtp::port", 465) // 465或587
-	smtpUser := beego.AppConfig.DefaultString("smtp::user", "269598108@qq.com")
-	smtpPassword := beego.AppConfig.DefaultString("smtp::password", "wbxjliuwtlzdbehe")
+	smtpUser := beego.AppConfig.DefaultString("smtp::user", "theo.wu@qq.com")
+	smtpPassword := beego.AppConfig.DefaultString("smtp::password", "xxxxxxx")
 
 	// fmt.Println(smtpAddr, smtpPort, smtpUser, smtpPassword)
 	m := gomail.NewMessage()
